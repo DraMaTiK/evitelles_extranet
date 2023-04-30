@@ -1,5 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    test
+    <ul class="list-group mt-5">
+        {% if is_granted('ROLE_ADMIN') %}
+            <li class="list-group-item">
+                <a href="{{ url('app_customer_index') }}">Gestion des clients</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{{ url('app_sepas_index') }}">Gestion des demandes de paiement</a>
+            </li>
+        {% endif %}
+        {% if is_granted('ROLE_USER') %}
+            <li class="list-group-item">
+                <a href="{{ url('app_sepas_index') }}">D&eacute;connexion</a>
+            </li>
+        {% else %}
+            <li class="list-group-item">
+                <a href="{{ url('app_login') }}">Connexion</a>
+            </li>
+        {% endif %}
+    </ul>
 {% endblock %}

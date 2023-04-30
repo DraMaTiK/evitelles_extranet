@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Sepas{% endblock %}
+
+{% block body %}
+    <h1>Modifier une demande</h1>
+
+    {{ include('sepas/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_sepas_index') }}">Retour &agrave; la liste</a>
+
+    {{ include('sepas/_delete_form.html.twig') }}
+{% endblock %}

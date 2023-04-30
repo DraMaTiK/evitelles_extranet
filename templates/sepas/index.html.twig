@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sepas index{% endblock %}
+
+{% block body %}
+    <h1>Liste des demandes de paiement</h1>
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>N&deg; de mandat</th>
+                <th>Status</th>
+                <th>Date de cr&eacute;ation</th>
+                <th>Montant</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sepa in sepas %}
+            <tr>
+                <td>{{ sepa.id }}</td>
+                <td>{{ sepa.email }}</td>
+                <td>{{ sepa.mandate }}</td>
+                <td>{{ sepa.status }}</td>
+                <td>{{ sepa.dateCreated ? sepa.dateCreated|date('d/m/Y H:i:s') : '' }}</td>
+                <td>{{ sepa.amount }} &euro;</td>
+                <td>
+                    <a href="{{ path('app_sepas_show', {'token': sepa.token}) }}" class="btn btn-outline-primary">Voir</a>
+                    <a href="{{ path('app_sepas_edit', {'id': sepa.id}) }}" class="btn btn-outline-info">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucune demande trouv&eacute;e</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sepas_new') }}" class="btn btn-outline-success">Cr&eacute;er une nouvelle demande</a>
+    <a href="{{ path('homepage') }}" class="btn">Retour &agrave; au menu</a>
+{% endblock %}

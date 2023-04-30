@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Sepas{% endblock %}
+
+{% block body %}
+    <h1>Nouvelle demande de paiement</h1>
+
+    {{ include('sepas/_form.html.twig') }}
+
+    <a href="{{ path('app_sepas_index') }}" class="btn btn-outline-secondary">Retourner &agrave; la liste</a>
+{% endblock %}
